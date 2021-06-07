@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}page-application{% endblock %}
+
+{% block body %}
+    <div id="app"></div>
+{% endblock %}
+
+{% block javascripts_dataLayout %}
+    {{ parent() }}
+    <script>
+        dataLayout.userId = {{ app.user.id }};
+        dataLayout.token = "{{ csrf_token(app.user.id) }}";
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}"></script>
+    <script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
+
